@@ -14,7 +14,6 @@ CXX_SOURCES = \
   Packet.cpp \
   Serial.cpp \
   Time.cpp \
-  Uploader.cpp \
   Wrapper.cpp \
   entry_points.cpp
 

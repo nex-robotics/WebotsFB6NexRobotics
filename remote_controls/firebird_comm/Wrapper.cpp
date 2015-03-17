@@ -11,8 +11,6 @@
 #include "Sensor.hpp"
 #include "Serial.hpp"
 #include "Time.hpp"
-#include "Uploader.hpp"
-#include "UploaderData.hpp"
 
 #include <vector>
 #include <iostream>
@@ -231,25 +229,5 @@ void *Wrapper::callCustomFunction(void *args) {
     return findAvailablePorts(args);
   }
   
-  if (! cUploadReturnValue)
-    cUploadReturnValue = new int[1];
-  
-  UploaderData uploaderData = ((UploaderData *)args)[0];
-  if (uploaderData.cmd() == UploaderData::CONNECT_CMD) {
-    // connect
-    cUploadReturnValue[0] = Uploader::connect(uploaderData.message());
-  } else if (uploaderData.cmd() == UploaderData::DISCONNECT_CMD) {
-    // disconnect
-    Uploader::disconnect();
-    cUploadReturnValue[0] = 0;
-  } else if (uploaderData.cmd() == UploaderData::CANCEL_CMD) {
-    // cancel upload
-    Uploader::cancelUpload();
-    cUploadReturnValue[0] = 0;
-  } else {
-    // send file
-    cUploadReturnValue[0] = Uploader::send(uploaderData.robotId(), uploaderData.message(), uploaderData.updateProgressFunc());
-  }
-  
-  return cUploadReturnValue;
+  return NULL;
 }
