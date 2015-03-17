@@ -42,14 +42,6 @@
 ### or if you want to link with the Qt framework embedded in Webots:
 ### QT = core gui widgets network
 ###
-### ----- Java -----
-### if your program uses several C source files:
-### JAVA_SOURCES = my_plugin.java my_clever_algo.java
-###
-### if your Java controller needs additional libraries, you should define
-### the CLASSPATH environment variable as explained in the Webots User Guide
-### CLASSPATH=relative/mylib.jar
-###
 ###-----------------------------------------------------------------------------
 
 ### Do not modify: this includes Webots global Makefile.include

@@ -6,4 +6,4 @@ minimizedPerspectives:
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/test_fbcomm1/test_fbcomm1.c" "plugins/WebotsFB6NexRobotics/robot_windows/firebird_6_window/Makefile" "plugins/WebotsFB6NexRobotics/remote_controls/firebird_comm/Makefile"
+textFiles: 0 "plugins/WebotsFB6NexRobotics/robot_windows/firebird_6_window/Makefile" "plugins/WebotsFB6NexRobotics/remote_controls/firebird_comm/Makefile" "controllers/firebird6_obstacle_avoidance/firebird6_obstacle_avoidance.c"

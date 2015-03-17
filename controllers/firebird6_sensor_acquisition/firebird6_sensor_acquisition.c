@@ -1,8 +1,8 @@
 /*
- * File:          epuck_collision_avoidance.c
- * Date:          
- * Description:   
- * Author:        
+ * File:          firebird6_sensor_acquisition.c
+ * Date:          17 March 2015
+ * Description:   Demo code for sensor aquisition for Firebird 6 robot
+ * Author:        Anant Malewar; Nex Robotics
  * Modifications: 
  */
 
@@ -11,6 +11,7 @@
  * <webots/differential_wheels.h>, etc.
  */
 #include <stdio.h>
+#include <math.h>
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
@@ -32,7 +33,7 @@ int main(int argc, char **argv)
 {
   /* necessary to initialize webots stuff */
   wb_robot_init();
-  printf("FB6 controller for obstacle avoidance\n");
+  printf("FB6 controller for sensor aquisition\n");
   
   /*
    * You should declare here WbDeviceTag variables for storing
@@ -41,7 +42,7 @@ int main(int argc, char **argv)
    *  WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
    */
   int i;
-  WbDeviceTag ps[8], sharp[8], grs[8], acc1,cmpXY1,cmpZ1, gyro1;
+  WbDeviceTag ps[8], sharp[8], acc1,cmpXY1,cmpZ1, gyro1;
   double left_encoder, right_encoder;
   char ps_names[8][4] = {
   "ps0", "ps1", "ps2", "ps3",
@@ -53,25 +54,13 @@ int main(int argc, char **argv)
   "sharp_04", "sharp_05", "sharp_06", "sharp_07"
   };
 
-  /*char groundSensor[8][4] = {
-  "gs0", "gs1", "gs2", "gs3", "gs4", "gs5", "gs6", "gs7"
-  };*/
-
   for (i=0; i<8; i++) {
   ps[i] = wb_robot_get_device(ps_names[i]);
   wb_distance_sensor_enable(ps[i], TIME_STEP);
   
   sharp[i] = wb_robot_get_device(sharp_names[i]);
   wb_distance_sensor_enable(sharp[i], TIME_STEP);
-  
-
   }
-  
-  /*for (i=0; i< 8; i++) {
-    grs[i] = wb_robot_get_device(groundSensor[i]);
-    wb_light_sensor_enable(grs[i], TIME_STEP);
-  
-  }*/
   
   // Enable Acceleometer
   acc1 = wb_robot_get_device("accelerometer_01");
@@ -105,7 +94,7 @@ int main(int argc, char **argv)
     for (i=0; i<8 ; i++)
     {
       ps_values[i] = wb_distance_sensor_get_value(ps[i]);
-      printf("%f ", ps_values[i]);
+      printf("sonar%d = %f ", i, ps_values[i]);
     }
     printf("\n");
     
@@ -113,92 +102,50 @@ int main(int argc, char **argv)
     for (i=0; i<8 ; i++)
     {
       sharp_values[i] = wb_distance_sensor_get_value(sharp[i]);
-      //printf("s = %f ", sharp_values[i]);
+      printf("sharp%d = %f ", i, sharp_values[i]);
     }
-    //printf("\n");
+    printf("\n");
     
-    /*double gs_values[8];
-    for (i=0; i<8 ; i++)
-    {
-      gs_values[i] = wb_light_sensor_get_value(grs[i]);
-      //printf("gs = %f ", gs_values[i]);
-    }*/
-    //printf("\n");
-    
-
     // read encoders
     left_encoder = wb_differential_wheels_get_left_encoder();
     right_encoder = wb_differential_wheels_get_right_encoder();
-    //printf("left enc = %f ", left_encoder);
-    //printf("right enc = %f ", right_encoder);
+    printf("left encoder = %f ", left_encoder);
+    printf("right encoder = %f ", right_encoder);
+    printf("\n");
     
     // Read accelerometer
     const double *accXYZ;
     accXYZ = wb_accelerometer_get_values(acc1);
-    /*printf("AX %f ", accXYZ[0]);
+    printf("AX %f ", accXYZ[0]);
     printf("AY %f ", accXYZ[1]);
     printf("AZ %f ", accXYZ[2]);
-    printf("\n");*/
+    printf("\n");
     
     
     // Read compass
     const double *cmpXY, *cmpZ;
     cmpXY = wb_compass_get_values(cmpXY1);
     cmpZ = wb_compass_get_values(cmpZ1);
-    /*printf("MX %f ", cmpXY[0]);
+    printf("MX %f ", cmpXY[0]);
     printf("MY %f ", cmpXY[1]);
     printf("MZ %f ", cmpZ[2]);
-    printf("\n");*/
+    printf("\n");
     
     // calculate bearing
-    /*double rad = atan2(cmpXY[0], cmpZ[2]);
+    double rad = atan2(cmpXY[0], cmpZ[2]);
     double bearing = (rad ) / 3.1428 * 180.0;
     if (bearing < 0.0)
     bearing = bearing + 360.0;
-    printf("bearing = %f \n", bearing);*/
+    printf("bearing = %f \n", bearing);
   
     
     // Read gyro
     const double *gyroXYZ;
     gyroXYZ = wb_gyro_get_values(gyro1);
-    /*printf("GX %f ", gyroXYZ[0]);
+    printf("GX %f ", gyroXYZ[0]);
     printf("GY %f ", gyroXYZ[1]);
     printf("GZ %f ", gyroXYZ[2]);
-    printf("\n");*/
-    
-
-
-    int threshold = 250;
-    /* Process sensor data here */
-    //bool left_obstacle = ps_values[0] > 100.0 || ps_values[1] > 100.0 || ps_values[2] > 100.0;
-    //bool right_obstacle = ps_values[5] > 100.0 || ps_values[6] > 100.0 || ps_values[7] > 100.0;
-    bool left_obstacle = ps_values[0] < threshold || ps_values[1] < threshold || ps_values[7] < threshold || ps_values[2] < threshold;
-    bool right_obstacle = ps_values[5] < threshold || ps_values[6] < threshold || ps_values[4] < threshold || ps_values[3] < threshold;
-    
-    /*
-     * Enter here functions to send actuator commands, like:
-     * wb_differential_wheels_set_speed(100.0,100.0);
-     */
-    // init speeds
-    double left_speed = 1;
-    double right_speed = 1;
-    // modify speeds according to obstacles
-    if (left_obstacle) {
-    // turn right
-      left_speed += 2.0;
-      right_speed -= 2.0;
-    }
-    else if (right_obstacle) {
-    // turn left
-      left_speed -= 2.0;
-      right_speed += 2.0;
-    }
-    printf("%f ", left_speed);
-    printf("%f ", right_speed);
-    // write actuators inputs
-    //left_speed = right_speed = -100;
-    wb_differential_wheels_set_speed(left_speed, right_speed);
-    //wb_differential_wheels_set_speed(5,-5);
+    printf("\n");
     
 
   };
