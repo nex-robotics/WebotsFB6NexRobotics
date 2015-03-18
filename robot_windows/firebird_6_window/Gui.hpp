@@ -15,11 +15,9 @@ class QGridLayout;
 class QWidget;
 class RemoteControlWidget;
 class MainWidget;
-class CameraGroupBox;
 class AccelerometerGroupBox;
 class GyroGroupBox;
 class MagnetometerGroupBox;
-class GroundSensorGroupBox;
 class EncoderGroupBox;
 
 class Gui : public webotsQtUtils::MainWindow
@@ -33,11 +31,9 @@ private:
   QGridLayout *mLayout;
   MainWidget *mMainWidget;
   RemoteControlWidget *mRemoteControlWidget;
-  CameraGroupBox *mCameraGroupBox;
   AccelerometerGroupBox *mAccelerometerGroupBox;
   GyroGroupBox *mGyroGroupBox;
   MagnetometerGroupBox *mMagnetometerGroupBox;
-  //GroundSensorGroupBox *mGroundSensorsGroupBox;
   EncoderGroupBox *mEncoderGroupBox;
 };
 

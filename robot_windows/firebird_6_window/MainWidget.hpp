@@ -1,7 +1,7 @@
 /*
  * File:         MainWidget.hpp
  * Date:         September 2010
- * Description:  Class defining the widget containing the e-puck representation
+ * Description:  Class defining the widget containing the firebird6 representation
  * Author:       fabien.rohrer@cyberbotics.com
  * Modifications:
  */
@@ -23,7 +23,7 @@ public:
 protected:
   virtual void paintEvent(QPaintEvent *event);
   void drawCenteredText(QPainter &p, int x, int y, const QString &text);
-  void drawEpuck(QPainter &p, int radius);
+  void drawFirebird6(QPainter &p, int radius);
   void drawSpeeds(QPainter &p, int radius);
   void drawIRSensors(QPainter &p, int innerRadius, int outerRadius);
   void drawLeds(QPainter &p, int radius);

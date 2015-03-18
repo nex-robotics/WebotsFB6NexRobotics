@@ -8,10 +8,8 @@ CXX_SOURCES = \
   AccelerometerGroupBox.cpp \
   GyroGroupBox.cpp \
   MagnetometerGroupBox.cpp \
-  CameraGroupBox.cpp \
   FireBird6Representation.cpp \
   EncoderGroupBox.cpp \
-  GroundSensorGroupBox.cpp \
   Gui.cpp \
   MainWidget.cpp \
   RemoteControlWidget.cpp \

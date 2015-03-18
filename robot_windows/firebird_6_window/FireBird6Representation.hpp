@@ -37,7 +37,6 @@ public:
   static void killInstance();
   void update();
   
-  //int ledValue(int id) const;
   double distanceSensorValue(int id) const;
   double distanceSensorSharpValue(int id) const;
   double lightSensorValue(int id) const;
@@ -75,11 +74,9 @@ protected:
   FireBird6Representation(int);
   virtual ~FireBird6Representation();
 
-  //Device mLeds[NUMBER_OF_LEDS];
   Device mDistanceSensors[NUMBER_OF_DISTANCE_SENSORS];
   Device mDistanceSensors_Sharp[NUMBER_OF_DISTANCE_SENSORS_SHARP];
   Device mLightSensors[NUMBER_OF_LIGHT_SENSORS];
-  //Device mGroundSensors[NUMBER_OF_GROUND_SENSORS];
   Device mAccelerometer;
   Device mGyro;
   Device mMagnetometerXY;

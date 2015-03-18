@@ -24,14 +24,6 @@ FireBird6Representation::FireBird6Representation(int dummy) {
   
   int i;
   
-  // init leds
-  /*char ledName[] = "led0";
-  for (i = 0; i<NUMBER_OF_LEDS; i++) {
-    ledName[3] = '0' + i;
-    mLeds[i].tag = wb_robot_get_device(ledName);
-    mLeds[i].iValue = 0;
-  }*/
-  
   // init distance sensors
   char psName[] = "ps0";
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS; i++) {
@@ -47,14 +39,6 @@ FireBird6Representation::FireBird6Representation(int dummy) {
     mDistanceSensors_Sharp[i].tag = wb_robot_get_device(lsName);
     mDistanceSensors_Sharp[i].dValue = -1.0;
   }
-
-  // init light sensors
-  /*char lsName[] = "sharp_00";
-  for (i = 0; i<NUMBER_OF_LIGHT_SENSORS; i++) {
-    lsName[7] = '0' + i;
-    mLightSensors[i].tag = wb_robot_get_device(lsName);
-    mLightSensors[i].dValue = -1.0;
-  }*/
   
   // init the accelerometer
   mAccelerometer.tag = wb_robot_get_device("accelerometer_01");
@@ -70,16 +54,6 @@ FireBird6Representation::FireBird6Representation(int dummy) {
   mMagnetometerZ.tag = wb_robot_get_device("compassZ_01");
   mMagnetometerZ.dValues = 0;
 
-  // init the camera
-  /*mCameraWidth = 0;
-  mCameraHeight = 0;
-  mCamera.tag = wb_robot_get_device("camera");
-  mCamera.image = 0;
-  if (mCamera.tag) {
-    mCameraWidth = wb_camera_get_width(mCamera.tag);
-    mCameraHeight = wb_camera_get_height(mCamera.tag);
-  }*/
-
   // init the differential wheel stuff
   mEncoderValues[LEFT] = 0.0;
   mEncoderValues[RIGHT] = 0.0;
@@ -87,43 +61,6 @@ FireBird6Representation::FireBird6Representation(int dummy) {
   mSpeedValues[RIGHT] = 0.0;
   
 
-  // init optional devices
-  /*for (i = 0; i<NUMBER_OF_GROUND_SENSORS; i++) {
-    mGroundSensors[i].tag = 0;
-  }*/
-  
-  /*WbDeviceTag tag;
-  WbNodeType deviceType;
-  int groundSensorIndex, matchedItems = 0;
-  int numberOfDevices = wb_robot_get_number_of_devices();
-  for (int index = 0; index < numberOfDevices; index++) {
-    tag = wb_robot_get_device_by_index(index);
-    deviceType = wb_device_get_type(tag);    
-    if (deviceType == WB_NODE_LIGHT_SENSOR) {
-      const char *deviceName = wb_device_get_name(tag);
-      matchedItems = sscanf(deviceName, "gs%d", &groundSensorIndex);
-      if (matchedItems > 0) {
-        // init ground sensors
-        if (groundSensorIndex < NUMBER_OF_GROUND_SENSORS && mGroundSensors[groundSensorIndex].tag == 0) {
-          mGroundSensors[groundSensorIndex].tag = tag;
-          mGroundSensors[groundSensorIndex].dValue = -1.0;
-          mGroundSensorsExist = true;
-		  printf(" groundSensorIndex = %d ", tag);
-        }
-      }
-    }
-  }
-  printf ("\n");*/
-
-  // init ground sensors
-  /*char gsName[] = "gs0";
-  for (i = 0; i<NUMBER_OF_GROUND_SENSORS; i++) {
-    gsName[2] = '0' + i;
-    mGroundSensors[i].tag = wb_robot_get_device(gsName);
-    mGroundSensors[i].dValue = -1.0;
-  }
-  mGroundSensorsExist = true;*/
-  
   // update the available values
   update();
 }
@@ -151,11 +88,6 @@ void FireBird6Representation::update() {
   
   int i;
   
-  // update the leds state
-  /*for (i = 0; i<NUMBER_OF_LEDS; i++)
-    if (mLeds[i].tag)
-      mLeds[i].iValue = wb_led_get(mLeds[i].tag);*/
-  
   // update the maxbotix distance sensors state
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS; i++) {
     if (mDistanceSensors[i].tag) {
@@ -167,7 +99,7 @@ void FireBird6Representation::update() {
     }
   }
   
-    // update the sharp distance sensors state
+  // update the sharp distance sensors state
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS_SHARP; i++) {
     if (mDistanceSensors_Sharp[i].tag) {
       mDistanceSensors_Sharp[i].samplingPeriod = wb_distance_sensor_get_sampling_period(mDistanceSensors_Sharp[i].tag);
@@ -178,28 +110,6 @@ void FireBird6Representation::update() {
     }
   }
   
-  // update the light sensors state
-  /*for (i = 0; i<NUMBER_OF_LIGHT_SENSORS; i++) {
-    if (mLightSensors[i].tag) {
-      mLightSensors[i].samplingPeriod = wb_light_sensor_get_sampling_period(mLightSensors[i].tag);
-      if (mLightSensors[i].samplingPeriod > 0)
-        mLightSensors[i].dValue = wb_light_sensor_get_value(mLightSensors[i].tag);
-      else 
-        mLightSensors[i].dValue = -1.0;
-    }
-  }*/
-
-  // update the ground sensors state
-  /*for (i = 0; i<NUMBER_OF_GROUND_SENSORS; i++) {
-    if (mGroundSensors[i].tag) {
-      mGroundSensors[i].samplingPeriod = wb_distance_sensor_get_sampling_period(mGroundSensors[i].tag);
-      if (mGroundSensors[i].samplingPeriod > 0)
-        mGroundSensors[i].dValue = wb_distance_sensor_get_value(mGroundSensors[i].tag);
-      else 
-        mGroundSensors[i].dValue = -1.0;
-    }
-  }*/
-
   // update the accelerometer state
   if (mAccelerometer.tag) {
     mAccelerometer.samplingPeriod = wb_accelerometer_get_sampling_period(mAccelerometer.tag);
@@ -236,15 +146,6 @@ void FireBird6Representation::update() {
       mMagnetometerZ.dValues = 0;
   }
 
-  // update the camera state
-  /*if (mCamera.tag) {
-    mCamera.samplingPeriod = wb_camera_get_sampling_period(mCamera.tag);
-    if (mCamera.samplingPeriod > 0)
-      mCamera.image = wb_camera_get_image(mCamera.tag);
-    else 
-      mCamera.image = 0;
-  }*/
-  
   // update the differential wheels stuff
   mEncodersSamplingValues = wb_differential_wheels_get_encoders_sampling_period();
   if (mEncodersSamplingValues > 0) {
@@ -259,11 +160,6 @@ void FireBird6Representation::update() {
 }
 
 // getters
-/*int FireBird6Representation::ledValue(int id) const {
-  if (id >= 0 && id < NUMBER_OF_LEDS)
-    return mLeds[id].iValue;
-  return 0;
-}*/
 
 double FireBird6Representation::distanceSensorValue(int id) const {
   if (id >= 0 && id < NUMBER_OF_DISTANCE_SENSORS)
@@ -276,18 +172,6 @@ double FireBird6Representation::distanceSensorSharpValue(int id) const {
     return mDistanceSensors_Sharp[id].dValue;
   return -1.0;
 }
-
-/*double FireBird6Representation::lightSensorValue(int id) const {
-  if (id >= 0 && id < NUMBER_OF_LIGHT_SENSORS)
-    return mLightSensors[id].dValue;
-  return -1.0;
-}*/
-
-/*double FireBird6Representation::groundSensorValue(int id) const {
-  if (id >= 0 && id < NUMBER_OF_GROUND_SENSORS && mGroundSensors[id].tag)
-    return mGroundSensors[id].dValue;
-  return -1.0;
-}*/
 
 const double *FireBird6Representation::accelerometerValues() const {
   return mAccelerometer.dValues;
@@ -354,13 +238,6 @@ bool FireBird6Representation::isLightSensorEnabled(int id) const {
   return ret;
 }
 
-/*bool FireBird6Representation::isGroundSensorEnabled(int id) const {
-  bool ret = false;
-  if (id >= 0 && id < NUMBER_OF_GROUND_SENSORS && mGroundSensors[id].tag)
-    ret = (mGroundSensors[id].samplingPeriod > 0);
-  return ret;
-}*/
-
 bool FireBird6Representation::isAccelerometerEnabled() const {
   return (mAccelerometer.samplingPeriod > 0);
 }
@@ -387,11 +264,9 @@ void FireBird6Representation::enableAllSensors() {
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS_SHARP; i++)
     wb_distance_sensor_enable(mDistanceSensors_Sharp[i].tag, basicTimeStep);
 
-  //for (i = 0; i<NUMBER_OF_GROUND_SENSORS && mGroundSensors[i].tag; i++)
-    //wb_distance_sensor_enable(mGroundSensors[i].tag, basicTimeStep);
-
   wb_accelerometer_enable(mAccelerometer.tag, basicTimeStep);
   wb_gyro_enable(mGyro.tag, basicTimeStep);
-  //wb_camera_enable(mCamera.tag, basicTimeStep);
+  wb_compass_enable(mMagnetometerXY.tag, basicTimeStep);
+  wb_compass_enable(mMagnetometerZ.tag, basicTimeStep);
   wb_differential_wheels_enable_encoders(basicTimeStep);
 }

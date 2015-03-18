@@ -75,24 +75,21 @@ void MainWidget::paintEvent(QPaintEvent *event) {
   int h = height();
   int ref = (w>h)?h:w; // ref = minimum between w and h
   int irDeviceRadius = ref*60/100/2; // 60% of the half of the ref
-  int epuckRadius    = ref*65/100/2; // 65% of the half of the ref
+  int firebird6Radius    = ref*65/100/2; // 65% of the half of the ref
   int labelRadius    = ref*87/100/2; // 87% of the half of the ref
   
   // create the painter
   QPainter painter(this);
   
-  // draw the e-puck
-  drawEpuck(painter, epuckRadius);
+  // draw the Firebird6
+  drawFirebird6(painter, firebird6Radius);
   
   // draw the squares representing the ir devices, draw the distance sensor values,
   // and draw the light sensor values
   drawIRSensors(painter, irDeviceRadius, labelRadius);
   
-  // draw the leds
-  //drawLeds(painter, epuckRadius);
-  
   // draw the speed bars
-  drawSpeeds(painter, epuckRadius);
+  drawSpeeds(painter, firebird6Radius);
 }
 
 // draw the squares representing the ir devices, draw the distance sensor values,
@@ -146,40 +143,6 @@ void MainWidget::drawIRSensors(QPainter &p, int innerRadius, int outerRadius) {
   }
 }
 
-// draw the 8 leds + the front led
-/*void MainWidget::drawLeds(QPainter &p, int radius) {
-  int w = width();
-  int h = height();
-  int ledSize = 8;
-  FireBird6Representation *epuck = FireBird6Representation::instance();
-  
-  p.setPen(QPen(Qt::black));
-  // draw the 8 leds + the front led
-  for (int i=0; i<10; i++) {
-    if (i==8) // the body led is not drawn in this function
-      continue;
-    int u = w/2 + radius*cos(angleLed[i]);
-    int v = h/2 - radius*sin(angleLed[i]);
-
-    // set the right brush according to the led state
-    if (epuck->ledValue(i))
-      p.setBrush(QBrush(Qt::red));
-    else
-      p.setBrush(QBrush(Qt::black));
-
-    // draw the led
-    p.save();
-    p.translate(u, v);
-    if (i==9) // the front led is a circle
-      p.drawEllipse(-ledSize/2, -ledSize/2, ledSize, ledSize);
-    else { // while the others are a rotated rectangle
-      p.rotate(-angleLed[i]*180.0/M_PI);
-      p.drawRect(-ledSize/2, -ledSize/2, ledSize, ledSize);
-    }
-    p.restore();
-  }
-}*/
-
 // draw the speed sliders
 void MainWidget::drawSpeeds(QPainter &p, int radius) {
   int w = width();
@@ -216,18 +179,14 @@ void MainWidget::drawSpeeds(QPainter &p, int radius) {
   }
 }
 
-// draw an e-puck at the center of the widget
+// draw an Firebird6 at the center of the widget
 // if the body led is enabled, draw the circle in green
-void MainWidget::drawEpuck(QPainter &p, int radius) {
+void MainWidget::drawFirebird6(QPainter &p, int radius) {
   int w = width();
   int h = height();
-  //FireBird6Representation *epuck = FireBird6Representation::instance();
   
   p.setPen(QPen(Qt::black));
-  //if (epuck->ledValue(8))
-  //  p.setBrush(QBrush(green));
-  //else
-    p.setBrush(QBrush(Qt::lightGray));
+  p.setBrush(QBrush(Qt::lightGray));
   p.drawEllipse (w/2-radius, h/2-radius, 2*radius, 2*radius);
 }
 

@@ -1,11 +1,9 @@
 #include "Gui.hpp"
 #include "RemoteControlWidget.hpp"
 #include "MainWidget.hpp"
-//#include "CameraGroupBox.hpp"
 #include "AccelerometerGroupBox.hpp"
 #include "GyroGroupBox.hpp"
 #include "MagnetometerGroupBox.hpp"
-#include "GroundSensorGroupBox.hpp"
 #include "EncoderGroupBox.hpp"
 #include "FireBird6Representation.hpp"
 
@@ -23,29 +21,19 @@ Gui::Gui() :
   QWidget *containerWidget = new QWidget(this);
   RemoteControlWidget::setParentInstance(this);
   mRemoteControlWidget = RemoteControlWidget::instance();
-  //mCameraGroupBox = new CameraGroupBox(this);
   mAccelerometerGroupBox = new AccelerometerGroupBox(this);
   mEncoderGroupBox = new EncoderGroupBox(this);
   mGyroGroupBox = new GyroGroupBox(this);
   mMagnetometerGroupBox = new MagnetometerGroupBox(this);
   
   int rowsNumber = 2;
-  /*if (FireBird6Representation::instance()->groundSensorsExist()) {
-    mGroundSensorsGroupBox = new GroundSensorGroupBox(this);
-    rowsNumber++;
-  } else {
-    mGroundSensorsGroupBox = NULL;
-  }*/
-  
+
   mMainWidget = new MainWidget(this);
   
   // place them into the grid mLayout
   mLayout = new QGridLayout;
   mLayout->addWidget(mMainWidget, 0, 0, rowsNumber, 1);
   mLayout->addWidget(mRemoteControlWidget, rowsNumber, 0);
-  //mLayout->addWidget(mCameraGroupBox, 0, 1);
-  //if (mGroundSensorsGroupBox)
-    //mLayout->addWidget(mGroundSensorsGroupBox, 1, 1);
   mLayout->addWidget(mEncoderGroupBox, 2, 1);
   mLayout->addWidget(mAccelerometerGroupBox, 0, 2);
   mLayout->addWidget(mGyroGroupBox, 1, 2);
@@ -56,7 +44,7 @@ Gui::Gui() :
   setCentralWidget(containerWidget);
   
   // set the title
-  QString title("Fire Bird 6 viewer (");
+  QString title("Firebird 6 viewer (");
   title += wb_robot_get_name();
   title += ")";
   setWindowTitle(title);
@@ -103,11 +91,8 @@ Gui::~Gui() {
 void Gui::updateValues() {
   mMainWidget->updateValues();
   mRemoteControlWidget->updateValues();
-  //mCameraGroupBox->updateValues();
   mAccelerometerGroupBox->updateValues();
   mGyroGroupBox->updateValues();
   mMagnetometerGroupBox->updateValues();
   mEncoderGroupBox->updateValues();
-  /*if (mGroundSensorsGroupBox)
-    mGroundSensorsGroupBox->updateValues();*/
 }

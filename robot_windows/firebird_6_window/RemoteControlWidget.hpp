@@ -34,8 +34,6 @@ public:
 public slots:
   void portsUpdated(int index);
   void populatePorts();
-  void connectDevice();
-  void uploadController();
   void enableAllSensors();
 
 signals:
@@ -51,7 +49,6 @@ private:
   QGridLayout *mLayout;
   QComboBox *mPortsComboBox;
   QPushButton *mRefreshPortsButton;
-  QPushButton *mUploadButton;
   QPushButton *mEnableButton;
   QStringList mPorts;
   QString mPortName;
@@ -62,17 +59,6 @@ private:
   QFutureWatcher<int> *mConnectFutureWatcher;
   QFutureWatcher<int> *mUploadFutureWatcher;
   
-  void initProgressDialogs();
-  int callUploadCustomFunction(void *args);
-  void checkUploadFinishState(int ret);
-
-  static UploaderData *cUploaderData;
-  static void updateProgress(int progressType, int progressValue);
-
-private slots:
-  void checkUploadFinishState(void);
-  void updateProgressBar(int progressType, int progressValue);
-  void cancelUpload(void);
 };
 
 #endif
