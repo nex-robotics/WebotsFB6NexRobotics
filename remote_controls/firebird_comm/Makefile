@@ -5,7 +5,6 @@
 
 
 CXX_SOURCES = \
-  Camera.cpp \
   Communication.cpp \
   Device.cpp \
   DeviceManager.cpp \

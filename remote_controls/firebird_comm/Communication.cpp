@@ -39,21 +39,10 @@ bool Communication::initialize(const string &port) {
 	char testCMD[5] = {0x4e, 0x45, 0x58, 0x05, 0x01};
 	const char safetyOFF[5] = {0x4e, 0x45, 0x58, 0x89, 0x00};
 
-    // Note: first message always fail
-    // whatever drain / readline is performed before.
+    // Test message for checking communication
 	answer = talk(testCMD);
-/*
-    answer = talk("V\n");
-    if (!answer)
-      throw runtime_error("Cannot talk with the robot");
-    cout << "Running real e-puck (" << &answer[2] << ")" << endl;
-    free(answer);
-    
-    answer = mSerial->readLine();
-    free(answer);
 
-    answer = talk("S\n");*/
-    if (!answer)
+	if (!answer)
       throw runtime_error("Cannot talk with the robot");
 
     if (!mSerial)
@@ -73,14 +62,6 @@ bool Communication::initialize(const string &port) {
     cerr << "Connection failed with this error" << endl;
     cerr << e.what() << endl;
     cerr << endl;
-/*    cerr << "Please check:" << endl;
-    cerr << "- your Bluetooth interface is setup properly on your computer" << endl;
-    cerr << "- the ID of the robot corresponds to the bluetooth connection" << endl;
-    cerr << "- the robot runs the latest version of the sercom program" << endl;
-    cerr << "- the robot is not too far away from the Bluetooth antenna of the computer" << endl;
-    cerr << "- the robot is switched on (the green led should be on)" << endl;
-    cerr << "- the battery of the robot is fully charged (the red led should off)" << endl;
-    cerr << "- the robot reset button was pressed" << endl;*/
     cleanup();
     return false;
   }
