@@ -1,10 +1,8 @@
 #include "FireBird6OutputPacket.hpp"
 
-//#include "Camera.hpp"
 #include "Device.hpp"
 #include "DeviceManager.hpp"
 #include "DifferentialWheels.hpp"
-#include "Led.hpp"
 #include "Sensor.hpp"
 #include "SingleValueSensor.hpp"
 #include "TripleValuesSensor.hpp"
@@ -13,7 +11,6 @@
 #include <vector>
 #include <algorithm>
 
-//#include <webots/camera.h>
 
 using namespace std;
 
@@ -22,12 +19,10 @@ FireBird6OutputPacket::FireBird6OutputPacket() :
   mAnswerSize(0),
   mDistanceSensorRequested(false),
   mSharpDistanceSensorRequested(false),
-  mGroundSensorRequested(false),
   mLightSensorRequested(false),
   mAccelerometerRequested(false),
   mGyroRequested(false),
   mMagnetometerRequested(false),
-  //mCameraRequested(false),
   mEncoderRequested(false)
 {
 }
@@ -42,12 +37,10 @@ void FireBird6OutputPacket::clear() {
 
   mDistanceSensorRequested = false;
   mSharpDistanceSensorRequested = false;
-  mGroundSensorRequested = false;
   mLightSensorRequested = false;
   mAccelerometerRequested = false;
   mGyroRequested = false;
   mMagnetometerRequested = false;
-  //mCameraRequested = false;
   mEncoderRequested = false;
 }
 
@@ -83,14 +76,9 @@ void FireBird6OutputPacket::apply(int simulationTime) {
     append(static_cast<char>(0x01));
 
     dw->resetSpeedRequested();
-	//printf("setting speed left = %d, right = %d\n", leftSpeed, rightSpeed);
   }
 
   if (dw->isEncoderRequested()) {
-    //append(static_cast<char>(-'P'));
-    //append(static_cast<short>(dw->leftEncoder()));
-    //append(static_cast<short>(dw->rightEncoder()));
-	
     dw->resetEncoderRequested();
   }
 
@@ -127,25 +115,8 @@ void FireBird6OutputPacket::apply(int simulationTime) {
   
   mDistanceSensorRequested = true;
   mSharpDistanceSensorRequested = true;
-  mGroundSensorRequested = true;
   mAccelerometerRequested = true;
   mGyroRequested = true;
   mMagnetometerRequested = true;
 
-
-
-
-  // camera management
-  // it's better to put the camera at the end in case of
-  // retrieval after transmission troubles
-/*  Camera *camera = DeviceManager::instance()->camera();
-  if (camera->isSensorRequested()) {
-    mCameraRequested = true;
-    append(static_cast<char>(-'I'));
-    mAnswerSize += 3 + 2 * camera->width() * camera->height();
-  }*/
-
-  // This is require to end the packet
-  // even if the size is correct
-  //append('\0');
 }

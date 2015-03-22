@@ -26,12 +26,10 @@ public:
 
   bool areDistanceSensorRequested() const { return mDistanceSensorRequested; }
   bool areSharpDistanceSensorRequested() const { return mSharpDistanceSensorRequested; }
-  bool areGroundSensorRequested() const { return mGroundSensorRequested; }
   bool areLightSensorRequested() const { return mLightSensorRequested; }
   bool isAccelerometerRequested() const { return mAccelerometerRequested; }
   bool isGyroRequested() const { return mGyroRequested; }
   bool isMagnetometerRequested() const { return mMagnetometerRequested; }
-  bool isCameraRequested() const { return mCameraRequested; }
   bool isEncoderRequested() const { return mEncoderRequested; }
 
 private:
@@ -39,12 +37,10 @@ private:
 
   bool mDistanceSensorRequested;
   bool mSharpDistanceSensorRequested;
-  bool mGroundSensorRequested;
   bool mLightSensorRequested;
   bool mAccelerometerRequested;
   bool mGyroRequested;
   bool mMagnetometerRequested;
-  bool mCameraRequested;
   bool mEncoderRequested;
 };
 

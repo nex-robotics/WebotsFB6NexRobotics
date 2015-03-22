@@ -7,7 +7,6 @@
 #include "DifferentialWheels.hpp"
 #include "FireBird6OutputPacket.hpp"
 #include "FireBird6InputPacket.hpp"
-#include "Led.hpp"
 #include "Sensor.hpp"
 #include "Serial.hpp"
 #include "Time.hpp"
@@ -23,7 +22,6 @@ using namespace std;
 Communication *Wrapper::cCommunication = NULL;
 Time *Wrapper::cTime = NULL;
 bool Wrapper::cSuccess = true;
-//bool Wrapper::cCameraInitialized = false;
 int *Wrapper::cUploadReturnValue = NULL;
 
 void Wrapper::init() {
@@ -49,7 +47,6 @@ bool Wrapper::start(void *arg) {
   cCommunication->initialize(port);
   cTime = new Time();
   cSuccess = cCommunication->isInitialized();
-  //cCameraInitialized = false;
   return cSuccess;
 }
 
@@ -75,10 +72,6 @@ int Wrapper::robotStep(int step) {
   // setup the output packet
   FireBird6OutputPacket outputPacket;
   outputPacket.apply(beginStepTime);
-
-  // camera initialisation if required
-  //if (outputPacket.isCameraRequested())
-  //  initializeCamera();
 
   // 3 trials before giving up
   for (int i=0; i<3; i++) {
@@ -123,11 +116,6 @@ void Wrapper::stopActuators() {
   DifferentialWheels *dw = DeviceManager::instance()->differentialWheels();
   dw->resetSpeedRequested();
   dw->resetEncoderRequested();
-  
-  /*for (int i=0; i<10; i++) {
-    Led *led = DeviceManager::instance()->led(i);
-    led->resetLedRequested();
-  }*/
 
   vector<Device *>::const_iterator it;
   const vector<Device *> &devices = DeviceManager::instance()->devices();
@@ -139,8 +127,6 @@ void Wrapper::stopActuators() {
 
   // reset actuators
   differentialWheelsSetSpeed(0.0, 0.0);
-  //for(int i=0; i<10; i++)
-    //ledSet(DeviceManager::instance()->led(i)->tag(), 0);
 
   // send the packet
   robotStep(0);
@@ -170,59 +156,11 @@ void Wrapper::differentialWheelsSetEncoders(double left, double right) {
   dw->setRightEncoder(right);
 }
 
-void Wrapper::ledSet(WbDeviceTag tag, int state) {
-  Device *device = DeviceManager::instance()->findDeviceFromTag(tag);
-  Led *led = dynamic_cast<Led *>(device);
-  if (led) {
-    led->setLedRequested();
-    led->setState(state);
-  }
-}
-
 void *Wrapper::findAvailablePorts(void *) {
   Serial::updatePorts();
   const vector<std::string> *comPorts = Serial::availablePorts(); 
   return (void *) comPorts;
 }
-
-/*
-void Wrapper::initializeCamera() {
-  if (hasFailed() || cCameraInitialized)
-    return;
-
-  Camera *camera = DeviceManager::instance()->camera();
-
-  char *answer;
-
-  answer = cCommunication->talk("V\n");
-  if (answer)
-    free(answer);
-  else {
-    cSuccess = false;
-    return;
-  }
-  answer = cCommunication->readLine();
-  if (answer) {
-    int model;
-    sscanf(answer, "HW version: %X\r\n", &model);
-    camera->setModel(model);
-    free(answer);
-  }
-  else {
-    cSuccess = false;
-    return;
-  }
-
-  answer = cCommunication->talk(camera->generateInitialisationCommand().c_str());
-
-  if (answer) {
-    cCameraInitialized = true;
-    free(answer);
-  }
-  else
-    cSuccess = false;
-}
-*/
 
 void *Wrapper::callCustomFunction(void *args) {
   if (args == NULL) {

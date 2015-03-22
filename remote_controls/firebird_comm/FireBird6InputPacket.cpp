@@ -1,6 +1,5 @@
 #include "FireBird6InputPacket.hpp"
 
-//#include "Camera.hpp"
 #include "Device.hpp"
 #include "DeviceManager.hpp"
 #include "DifferentialWheels.hpp"
@@ -63,17 +62,6 @@ void FireBird6InputPacket::decode(int simulationTime, const FireBird6OutputPacke
   currentPos += 8*sizeof(unsigned char);	// sharp distance sensors
 
   // read value of optional ground sensor
- /* if (outputPacket.areGroundSensorRequested()) {
-    for (int i=0; i<8; i++) {
-      SingleValueSensor *gs = DeviceManager::instance()->groundSensor(i);
-      if (gs) {
-        double value = readUCharAt(currentPos+i);
-        wbr_light_sensor_set_value(gs->tag(), value);
-        gs->resetSensorRequested();
-        gs->setLastRefreshTime(simulationTime);
-      }
-    }
-  }*/
   currentPos += 8*sizeof(unsigned char); // ground / line sensors
 
   if (outputPacket.isAccelerometerRequested()) {
@@ -137,29 +125,10 @@ void FireBird6InputPacket::decode(int simulationTime, const FireBird6OutputPacke
       currentPos += 9;
     }
 
-	//printf("left E = %d, righr E = %d\n", values[0], values[1]);
-
     wbr_differential_wheels_set_encoders(values[0], values[1]);
 
     DifferentialWheels *dw = DeviceManager::instance()->differentialWheels();
     dw->resetSensorRequested();
   }
 
-
-/*  if (outputPacket.isCameraRequested()) {
-    int mode = (int) readUCharAt(currentPos++);
-    int wh1 = (int) readUCharAt(currentPos++); // can be width or height depending on the mode
-    int wh2 = (int) readUCharAt(currentPos++); // can be width or height depending on the mode
-    const unsigned char *rawImage = (const unsigned char *) &(data()[currentPos]);
-
-    Camera *camera = DeviceManager::instance()->camera();
-    camera->resetSensorRequested();
-
-    unsigned char *rgbImage = (unsigned char *) malloc(4 * wh1 * wh2);
-
-    if (camera->rawToBgraImage(rgbImage, rawImage, mode, wh1, wh2))
-      wbr_camera_set_image(camera->tag(), (const unsigned char *) rgbImage);
-
-    free(rgbImage);
-  }*/
 }

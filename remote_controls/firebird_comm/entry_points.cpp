@@ -16,8 +16,6 @@ bool wbr_init(WbrInterface *ri) {
   ri->wbr_set_refresh_rate = Wrapper::setRefreshRate;
   ri->wbr_differential_wheels_set_speed = Wrapper::differentialWheelsSetSpeed;
   ri->wbr_differential_wheels_set_encoders = Wrapper::differentialWheelsSetEncoders;
-  ri->wbr_led_set = Wrapper::ledSet;
-  ri->wbr_camera_set_fov = Wrapper::cameraSetFOV;
 
   return true;
 }

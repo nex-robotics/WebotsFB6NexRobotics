@@ -31,8 +31,6 @@ public:
   int leftEncoder() const { return mLEncoder; }
   int rightEncoder() const { return mREncoder; }
 
-  //void setLeftSpeed(double speed) { if(speed > maxspeed) speed = maxspeed; if(speed < -1.0 * maxspeed) speed = -1.0 * maxspeed; mLSpeed = sgn(speed)*(maxspeed - speed) * 212; }
-  //void setRightSpeed(double speed) { if(speed > maxspeed) speed = maxspeed; if(speed < -1.0 * maxspeed) speed = -1.0 * maxspeed; mRSpeed = sgn(speed)*(maxspeed - speed) * 212; }
   void setLeftSpeed(double speed) { mLSpeed = speed; }
   void setRightSpeed(double speed) { mRSpeed = speed; }
   void setLeftEncoder(double speed) { mLEncoder = speed; }

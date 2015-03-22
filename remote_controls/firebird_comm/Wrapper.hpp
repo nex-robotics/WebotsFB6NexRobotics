@@ -37,9 +37,6 @@ public:
   
   static void *callCustomFunction(void *args);
 
-  // unimplemented required functions
-  static void cameraSetFOV(WbDeviceTag tag, double fov) {}
-
 private:
   Wrapper() {}
   virtual ~Wrapper() {}
