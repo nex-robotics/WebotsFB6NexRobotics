@@ -6,7 +6,7 @@ PROTO FireBird6 [
   field SFVec3f translation 0 0 0
   field SFRotation rotation 0 1 0 0
   field SFString name "Fire Bird 6"
-  field SFString controller "test_fbcomm1"
+  field SFString controller "fire_bird_6_obstacle_avoidance"
   field SFString controllerArgs ""
   field SFString robotWindow "fire_bird_6_window"
   field SFString remoteControl "fire_bird_6_remote_control"
