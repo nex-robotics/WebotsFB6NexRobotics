@@ -2296,7 +2296,7 @@ DifferentialWheels {
             }
           }
           geometry Cylinder {
-            height 0.305
+            height 0.31
             radius 0.01
           }
         }
