@@ -7,5 +7,5 @@ Device::Device(WbDeviceTag tag, int index) :
   mIndex(index)
 {
   mName = wb_device_get_name(tag);
-  mType = wb_device_get_type(tag);
+  mType = wb_device_get_node_type(tag);
 }
