@@ -8,8 +8,8 @@ PROTO FireBird6 [
   field SFString name "Fire Bird 6"
   field SFString controller "test_fbcomm1"
   field SFString controllerArgs ""
-  field SFString robotWindow "Firebird6_window"
-  field SFString remoteControl "firebird_comm"
+  field SFString robotWindow "fire_bird_6_window"
+  field SFString remoteControl "fire_bird_6_remote_control"
   field MFNode bodySlot []
 ]
 {
