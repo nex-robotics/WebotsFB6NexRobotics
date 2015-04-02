@@ -1469,7 +1469,7 @@ DifferentialWheels {
     }
     DEF FB6_LeftWheel Solid {
       translation -0.15 -0.0799895 -0.0700054
-      rotation 1 2.78278e-05 -1.35402e-05 2.039
+      rotation 1 0 0 0
       children [
         DEF FB6_WHEEL_SHAPE_Inner Transform {
           rotation 0 1 0 1.5708
