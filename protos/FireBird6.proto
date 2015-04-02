@@ -2285,6 +2285,23 @@ DifferentialWheels {
       boundingObject USE FB6_Wheel_Bound
       physics USE FB6_WHEEL_PHY
     }
+    Transform {
+      translation 0 -0.0797 -0.07
+      rotation 0 0 1 1.5708
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.5 0.5 0.5
+            }
+          }
+          geometry Cylinder {
+            height 0.305
+            radius 0.01
+          }
+        }
+      ]
+    }
     Group {
       children IS bodySlot
     }
