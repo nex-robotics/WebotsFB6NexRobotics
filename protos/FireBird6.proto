@@ -2301,6 +2301,7 @@ DifferentialWheels {
     mass 2
   }
   controller IS controller
+  controllerArgs IS controllerArgs
   robotWindow IS robotWindow
   remoteControl IS remoteControl
   axleLength 0.3
