@@ -33,16 +33,16 @@ EncoderGroupBox::~EncoderGroupBox() {
 
 // update the mLabels
 void EncoderGroupBox::updateValues() {
-  FireBird6Representation *epuck = FireBird6Representation::instance();
+  FireBird6Representation *fireBird6 = FireBird6Representation::instance();
   
-  bool enable = epuck->areEncodersEnabled();
+  bool enable = fireBird6->areEncodersEnabled();
   setEnabled(enable);
   if (!enable)
     return;
   
   double encoders[] = {
-    epuck->leftEncoderValue(),
-    epuck->rightEncoderValue()
+    fireBird6->leftEncoderValue(),
+    fireBird6->rightEncoderValue()
   };
   for (int i=0; i<2; i++)
     mLabels[i]->setText(prefixes[i] + QString::number((int) encoders[i]));
