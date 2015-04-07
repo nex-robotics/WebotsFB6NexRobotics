@@ -39,4 +39,6 @@ RectangleArena {
 }
 FireBird6 {
   translation 0 0.135 0
+  remoteControl "fire_bird_6_remote_control"
 }
+
