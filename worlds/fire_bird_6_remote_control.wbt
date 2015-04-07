@@ -1,0 +1,44 @@
+#VRML_SIM V8.0.5 utf8
+WorldInfo {
+  info [
+    "Fire Bird 6 simulation"
+  ]
+  basicTimeStep 16
+  contactProperties [
+    ContactProperties {
+      material2 "firebird castor"
+      coulombFriction [
+        0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.431872 -0.876059 -0.214495 1.22874
+  position -1.23028 0.976613 0.671657
+}
+Background {
+  skyColor [
+    0.483604 0.856657 0.900587
+  ]
+}
+DirectionalLight {
+  ambientIntensity 1
+  direction 0.3 -0.6 -0.44
+  castShadows TRUE
+}
+DirectionalLight {
+  ambientIntensity 1
+  direction -0.33 -0.6 0.1
+  intensity 0.3
+}
+RectangleArena {
+  floorSize 2 2
+  wallThickness 0.03
+  wallHeight 0.2
+}
+FireBird6 {
+  translation 0 0.135 0
+  remoteControl "fire_bird_6_remote_control"
+}
+

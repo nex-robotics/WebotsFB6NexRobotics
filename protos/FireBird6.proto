@@ -9,7 +9,7 @@ PROTO FireBird6 [
   field SFString controller "fire_bird_6_obstacle_avoidance"
   field SFString controllerArgs ""
   field SFString robotWindow "fire_bird_6_window"
-  field SFString remoteControl "fire_bird_6_remote_control"
+  field SFString remoteControl ""
   field MFNode bodySlot []
 ]
 {
