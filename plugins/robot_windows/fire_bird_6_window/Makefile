@@ -22,7 +22,7 @@ QT = core gui widgets concurrent
 USE_C_API = true
 
 CFLAGS = -DQT_NO_OPENGL
-QT_UTILS = $(WEBOTS_HOME)/resources/projects/libraries/qt_utils
+QT_UTILS = $(WEBOTS_HOME)/resources/projects/default/libraries/qt_utils
 INCLUDE = -I"$(QT_UTILS)"
 LIBRARIES = -L"$(QT_UTILS)" -lqt_utils
 
