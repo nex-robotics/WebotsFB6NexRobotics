@@ -82,7 +82,7 @@ int Wrapper::robotStep(int step) {
       cerr << "Failed to send packet to the Fire Bird. Retry (" << (i+1) << ")..." << endl;
       continue;
     }
-  
+
     // setup and receive the input packet
     int answerSize = outputPacket.answerSize();
     FireBird6InputPacket inputPacket(answerSize);
@@ -158,7 +158,7 @@ void Wrapper::differentialWheelsSetEncoders(double left, double right) {
 
 void *Wrapper::findAvailablePorts(void *) {
   Serial::updatePorts();
-  const vector<std::string> *comPorts = Serial::availablePorts(); 
+  const vector<std::string> *comPorts = Serial::availablePorts();
   return (void *) comPorts;
 }
 
@@ -166,6 +166,6 @@ void *Wrapper::callCustomFunction(void *args) {
   if (args == NULL) {
     return findAvailablePorts(args);
   }
-  
+
   return NULL;
 }

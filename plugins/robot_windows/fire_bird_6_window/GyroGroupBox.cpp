@@ -23,7 +23,7 @@ GyroGroupBox::GyroGroupBox(QWidget *parent):
     mVBox->addWidget(mLabels[i]);
   }
   setLayout(mVBox);
-  
+
   // set the title
   setTitle("Gyro");
 }
@@ -38,12 +38,12 @@ GyroGroupBox::~GyroGroupBox() {
 // update
 void GyroGroupBox::updateValues() {
   FireBird6Representation *firebird6 = FireBird6Representation::instance();
-  
+
   bool enable = firebird6->isGyroEnabled();
   setEnabled(enable);
   if (!enable)
     return;
-  
+
   const double *gyroValues = firebird6->gyroValues();
   if (gyroValues) {
     for (int i=0; i<3; i++)
@@ -54,4 +54,3 @@ void GyroGroupBox::updateValues() {
     mLabels[Z]->setText("");
   }
 }
-

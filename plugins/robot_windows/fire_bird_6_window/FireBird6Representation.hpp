@@ -36,7 +36,7 @@ public:
   static FireBird6Representation *instance();
   static void killInstance();
   void update();
-  
+
   double distanceSensorValue(int id) const;
   double distanceSensorSharpValue(int id) const;
   double lightSensorValue(int id) const;
@@ -52,7 +52,7 @@ public:
   double leftEncoderValue() const;
   int cameraWidth() const;
   int cameraHeight() const;
-  
+
   bool isDistanceSensorEnabled(int id) const;
   bool isDistanceSensorSharpEnabled(int id) const;
   bool isLightSensorEnabled(int id) const;
@@ -70,7 +70,7 @@ public:
 
 protected:
   static FireBird6Representation *cInstance;
-  
+
   FireBird6Representation(int);
   virtual ~FireBird6Representation();
 

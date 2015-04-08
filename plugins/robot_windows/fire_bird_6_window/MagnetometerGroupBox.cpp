@@ -23,7 +23,7 @@ MagnetometerGroupBox::MagnetometerGroupBox(QWidget *parent):
     mVBox->addWidget(mLabels[i]);
   }
   setLayout(mVBox);
-  
+
   // set the title
   setTitle("Magnetometer");
 }
@@ -38,19 +38,19 @@ MagnetometerGroupBox::~MagnetometerGroupBox() {
 // update
 void MagnetometerGroupBox::updateValues() {
   FireBird6Representation *firebird6 = FireBird6Representation::instance();
-  
+
   bool enable = firebird6->isAccelerometerEnabled();
   setEnabled(enable);
   if (!enable)
     return;
-  
+
   const double *magValuesXY = firebird6->magnetometerXYValues();
   const double *magValuesZ = firebird6->magnetometerZValues();
   if (magValuesXY && magValuesZ) {
     for (int i=0; i<2; i++)
       mLabels[i]->setText(prefixes[i] + QString::number(magValuesXY[i],'f',4));
-	
-	mLabels[2]->setText(prefixes[2] + QString::number(magValuesZ[2],'f',4));
+
+    mLabels[2]->setText(prefixes[2] + QString::number(magValuesZ[2],'f',4));
 
   } else {
     mLabels[X]->setText("Disabled");
@@ -58,4 +58,3 @@ void MagnetometerGroupBox::updateValues() {
     mLabels[Z]->setText("");
   }
 }
-

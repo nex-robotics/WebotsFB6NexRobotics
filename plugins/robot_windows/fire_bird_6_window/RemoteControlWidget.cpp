@@ -24,7 +24,7 @@ QWidget *RemoteControlWidget::cParent = NULL;
 RemoteControlWidget *RemoteControlWidget::instance() {
   if (! cInstance)
     cInstance = new RemoteControlWidget(cParent);
-  
+
   return cInstance;
 }
 
@@ -43,7 +43,7 @@ RemoteControlWidget::RemoteControlWidget(QWidget *parent) :
   mConnectFutureWatcher = new QFutureWatcher<int>(this);
   mUploadFutureWatcher = new QFutureWatcher<int>(this);
   mHexFileName = "";
-  
+
   // create and set the combo box into this widget
   mLayout = new QGridLayout();
   mPortsComboBox = new QComboBox();
@@ -56,12 +56,12 @@ RemoteControlWidget::RemoteControlWidget(QWidget *parent) :
   mLayout->addWidget(mRefreshPortsButton, 0, 1);
   mLayout->addWidget(mEnableButton, 1, 1);
   setLayout(mLayout);
-  
+
   // connect the signals with their respective slots
   connect(mPortsComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(portsUpdated(int)));
   connect(mRefreshPortsButton, SIGNAL(clicked()), this, SLOT(populatePorts()));
   connect(mEnableButton, SIGNAL(clicked()), this, SLOT(enableAllSensors()));
-  
+
 }
 
 // destructor
@@ -81,10 +81,10 @@ RemoteControlWidget::~RemoteControlWidget() {
 void RemoteControlWidget::populatePorts() {
   mPortsComboBox->blockSignals(true);
   mRefreshPortsButton->blockSignals(true);
-  
+
   mPorts.clear();
   mPortsComboBox->clear();
-  
+
   mPortsComboBox->addItem("Simulation");
   mPortsComboBox->setCurrentIndex(0);
 

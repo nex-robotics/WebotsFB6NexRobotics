@@ -2,7 +2,7 @@
 
 #include <webots/accelerometer.h>
 #include <webots/gyro.h>
-#include <webots/compass.h> 
+#include <webots/compass.h>
 #include <webots/camera.h>
 #include <webots/device.h>
 #include <webots/differential_wheels.h>
@@ -21,9 +21,9 @@ FireBird6Representation *FireBird6Representation::cInstance = 0;
 // init the devices according to their names
 FireBird6Representation::FireBird6Representation(int dummy) {
   mGroundSensorsExist = false;
-  
+
   int i;
-  
+
   // init distance sensors
   char psName[] = "ps0";
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS; i++) {
@@ -39,7 +39,7 @@ FireBird6Representation::FireBird6Representation(int dummy) {
     mDistanceSensors_Sharp[i].tag = wb_robot_get_device(lsName);
     mDistanceSensors_Sharp[i].dValue = -1.0;
   }
-  
+
   // init the accelerometer
   mAccelerometer.tag = wb_robot_get_device("accelerometer_01");
   mAccelerometer.dValues = 0;
@@ -59,7 +59,7 @@ FireBird6Representation::FireBird6Representation(int dummy) {
   mEncoderValues[RIGHT] = 0.0;
   mSpeedValues[LEFT] = 0.0;
   mSpeedValues[RIGHT] = 0.0;
-  
+
 
   // update the available values
   update();
@@ -85,37 +85,37 @@ void FireBird6Representation::killInstance() {
 
 // update the values of the different components
 void FireBird6Representation::update() {
-  
+
   int i;
-  
+
   // update the maxbotix distance sensors state
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS; i++) {
     if (mDistanceSensors[i].tag) {
       mDistanceSensors[i].samplingPeriod = wb_distance_sensor_get_sampling_period(mDistanceSensors[i].tag);
       if (mDistanceSensors[i].samplingPeriod > 0)
         mDistanceSensors[i].dValue = wb_distance_sensor_get_value(mDistanceSensors[i].tag);
-      else 
+      else
         mDistanceSensors[i].dValue = -1.0;
     }
   }
-  
+
   // update the sharp distance sensors state
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS_SHARP; i++) {
     if (mDistanceSensors_Sharp[i].tag) {
       mDistanceSensors_Sharp[i].samplingPeriod = wb_distance_sensor_get_sampling_period(mDistanceSensors_Sharp[i].tag);
       if (mDistanceSensors_Sharp[i].samplingPeriod > 0)
         mDistanceSensors_Sharp[i].dValue = wb_distance_sensor_get_value(mDistanceSensors_Sharp[i].tag);
-      else 
+      else
         mDistanceSensors_Sharp[i].dValue = -1.0;
     }
   }
-  
+
   // update the accelerometer state
   if (mAccelerometer.tag) {
     mAccelerometer.samplingPeriod = wb_accelerometer_get_sampling_period(mAccelerometer.tag);
     if (mAccelerometer.samplingPeriod > 0)
       mAccelerometer.dValues = wb_accelerometer_get_values(mAccelerometer.tag);
-    else 
+    else
       mAccelerometer.dValues = 0;
   }
 
@@ -124,7 +124,7 @@ void FireBird6Representation::update() {
     mGyro.samplingPeriod = wb_gyro_get_sampling_period(mGyro.tag);
     if (mGyro.samplingPeriod > 0)
       mGyro.dValues = wb_gyro_get_values(mGyro.tag);
-    else 
+    else
       mGyro.dValues = 0;
   }
 
@@ -133,7 +133,7 @@ void FireBird6Representation::update() {
     mMagnetometerXY.samplingPeriod = wb_compass_get_sampling_period(mMagnetometerXY.tag);
     if (mMagnetometerXY.samplingPeriod > 0)
       mMagnetometerXY.dValues = wb_compass_get_values(mMagnetometerXY.tag);
-    else 
+    else
       mMagnetometerXY.dValues = 0;
   }
 
@@ -142,7 +142,7 @@ void FireBird6Representation::update() {
     mMagnetometerZ.samplingPeriod = wb_compass_get_sampling_period(mMagnetometerZ.tag);
     if (mMagnetometerZ.samplingPeriod > 0)
       mMagnetometerZ.dValues = wb_compass_get_values(mMagnetometerZ.tag);
-    else 
+    else
       mMagnetometerZ.dValues = 0;
   }
 
@@ -260,7 +260,7 @@ void FireBird6Representation::enableAllSensors() {
 
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS; i++)
     wb_distance_sensor_enable(mDistanceSensors[i].tag, basicTimeStep);
-  
+
   for (i = 0; i<NUMBER_OF_DISTANCE_SENSORS_SHARP; i++)
     wb_distance_sensor_enable(mDistanceSensors_Sharp[i].tag, basicTimeStep);
 

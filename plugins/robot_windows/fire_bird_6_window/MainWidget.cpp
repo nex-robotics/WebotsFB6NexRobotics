@@ -69,7 +69,7 @@ QSize MainWidget::minimumSizeHint() const {
 
 // draw the widget
 void MainWidget::paintEvent(QPaintEvent *event) {
-  
+
   // compute stuff
   int w = width();
   int h = height();
@@ -77,17 +77,17 @@ void MainWidget::paintEvent(QPaintEvent *event) {
   int irDeviceRadius = ref*60/100/2; // 60% of the half of the ref
   int firebird6Radius    = ref*65/100/2; // 65% of the half of the ref
   int labelRadius    = ref*87/100/2; // 87% of the half of the ref
-  
+
   // create the painter
   QPainter painter(this);
-  
+
   // draw the Firebird6
   drawFirebird6(painter, firebird6Radius);
-  
+
   // draw the squares representing the ir devices, draw the distance sensor values,
   // and draw the light sensor values
   drawIRSensors(painter, irDeviceRadius, labelRadius);
-  
+
   // draw the speed bars
   drawSpeeds(painter, firebird6Radius);
 }
@@ -101,7 +101,7 @@ void MainWidget::drawIRSensors(QPainter &p, int innerRadius, int outerRadius) {
   QFontMetrics metrics(font());
   int fontHeight_2 = metrics.height()/2;
   FireBird6Representation *fb6 = FireBird6Representation::instance();
-  
+
   p.setBrush(QBrush(Qt::gray));
   for (int i=0; i<8; i++) {
     // compute the coordinates
@@ -113,12 +113,12 @@ void MainWidget::drawIRSensors(QPainter &p, int innerRadius, int outerRadius) {
     int offset_ls = -fontHeight_2;
     bool dsEnabled = fb6->isDistanceSensorEnabled(i);
     bool dsSharpEnabled = fb6->isDistanceSensorSharpEnabled(i);
-    
+
     if ((dsEnabled && !dsSharpEnabled) || (!dsEnabled && dsSharpEnabled)) {
       offset_ds = 0;
       offset_ls = 0;
     }
-    
+
     // draw the ir representation
     p.setPen(QPen(Qt::black));
     p.save();
@@ -126,7 +126,7 @@ void MainWidget::drawIRSensors(QPainter &p, int innerRadius, int outerRadius) {
     p.rotate(-angleIRDevices[i]*180.0/M_PI);
     p.drawRect(- squareSize/2, - squareSize, squareSize, 2*squareSize);
     p.restore();
-    
+
     // draw the values of the distance sensors if needed
     if (dsEnabled) {
       p.setPen(QPen(red));
@@ -155,23 +155,23 @@ void MainWidget::drawSpeeds(QPainter &p, int radius) {
   int sliderWidth = 14;
   int sliderHeight = 4;
   int worstTextWidth_2 = metrics.tightBoundingRect("-1000").width() / 2;
-  
+
   // draw the two sliders
   for (int i=0; i<2; i++) {
     int sign = (i==0)?-1:1;
     int centerX = w/2 + sign*0.7071*radius;
     int centerY = h/2;
-    
+
     // draw the bar
     p.setPen(QPen(Qt::black));
     p.setBrush(QBrush(Qt::lightGray));
     p.drawRect(centerX - barWidth/2, centerY - barHeight/2, barWidth, barHeight);
-    
+
     // draw the slider
     centerY -= speeds[i] * barHeight / 1000 / 2;
     p.setBrush(QBrush(blue));
     p.drawRect(centerX - sliderWidth/2, centerY - sliderHeight/2, sliderWidth, sliderHeight);
-    
+
     // draw the text
     p.setPen(QPen(blue));
     centerX = w/2 + sign*0.7071*radius - sign*(worstTextWidth_2 + sliderWidth/2 + 1);
@@ -184,7 +184,7 @@ void MainWidget::drawSpeeds(QPainter &p, int radius) {
 void MainWidget::drawFirebird6(QPainter &p, int radius) {
   int w = width();
   int h = height();
-  
+
   p.setPen(QPen(Qt::black));
   p.setBrush(QBrush(Qt::lightGray));
   p.drawEllipse (w/2-radius, h/2-radius, 2*radius, 2*radius);

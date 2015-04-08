@@ -23,7 +23,7 @@ AccelerometerGroupBox::AccelerometerGroupBox(QWidget *parent):
     mVBox->addWidget(mLabels[i]);
   }
   setLayout(mVBox);
-  
+
   // set the title
   setTitle("Accelerometer");
 }
@@ -38,12 +38,12 @@ AccelerometerGroupBox::~AccelerometerGroupBox() {
 // update
 void AccelerometerGroupBox::updateValues() {
   FireBird6Representation *firebird6 = FireBird6Representation::instance();
-  
+
   bool enable = firebird6->isAccelerometerEnabled();
   setEnabled(enable);
   if (!enable)
     return;
-  
+
   const double *accValues = firebird6->accelerometerValues();
   if (accValues) {
     for (int i=0; i<3; i++)
@@ -54,4 +54,3 @@ void AccelerometerGroupBox::updateValues() {
     mLabels[Z]->setText("");
   }
 }
-

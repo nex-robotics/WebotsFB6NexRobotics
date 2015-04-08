@@ -25,11 +25,11 @@ Gui::Gui() :
   mEncoderGroupBox = new EncoderGroupBox(this);
   mGyroGroupBox = new GyroGroupBox(this);
   mMagnetometerGroupBox = new MagnetometerGroupBox(this);
-  
+
   int rowsNumber = 2;
 
   mMainWidget = new MainWidget(this);
-  
+
   // place them into the grid mLayout
   mLayout = new QGridLayout;
   mLayout->addWidget(mMainWidget, 0, 0, rowsNumber, 1);
@@ -40,15 +40,15 @@ Gui::Gui() :
   mLayout->addWidget(mMagnetometerGroupBox, 2, 2);
 
   containerWidget->setLayout(mLayout);
-  
+
   setCentralWidget(containerWidget);
-  
+
   // set the title
   QString title("Firebird 6 viewer (");
   title += wb_robot_get_name();
   title += ")";
   setWindowTitle(title);
-  
+
   // defining the style sheet
   setStyleSheet(
     "QGroupBox {"

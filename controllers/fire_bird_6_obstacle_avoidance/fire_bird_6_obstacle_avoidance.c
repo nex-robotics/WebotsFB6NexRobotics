@@ -3,7 +3,7 @@
  * Date:          17 March 2015
  * Description:   Demo code for obstacle avoidance on Firebird 6 robot
  * Author:        Anant Malewar; Nex Robotics
- * Modifications: 
+ * Modifications:
  */
 
 #include <webots/robot.h>

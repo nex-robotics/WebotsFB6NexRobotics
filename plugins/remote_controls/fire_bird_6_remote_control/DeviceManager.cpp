@@ -37,7 +37,7 @@ DeviceManager::DeviceManager() {
   mDevices.push_back(mMagZ);
   mMagXY = new TripleValuesSensor(wb_robot_get_device("compassXY_01"), 0);
   mDevices.push_back(mMagXY);
-  
+
 
   mGyro = new TripleValuesSensor(wb_robot_get_device("gyro_01"), 0);
   mDevices.push_back(mGyro);
@@ -58,7 +58,7 @@ DeviceManager::DeviceManager() {
     mSharpDistanceSensors[i] = new SingleValueSensor(wb_robot_get_device(name), i);
     mDevices.push_back(mSharpDistanceSensors[i]);
   }
-  
+
 }
 
 DeviceManager::~DeviceManager() {

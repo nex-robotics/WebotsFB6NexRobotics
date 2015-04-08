@@ -3,14 +3,14 @@
  * Date:          17 March 2015
  * Description:   Demo code for sensor aquisition for Firebird 6 robot
  * Author:        Anant Malewar; Nex Robotics
- * Modifications: 
+ * Modifications:
  */
 
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
 #include <webots/accelerometer.h>
-#include <webots/compass.h> 
+#include <webots/compass.h>
 #include <webots/gyro.h>
 
 #include <stdio.h>
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   wb_differential_wheels_enable_encoders(TIME_STEP);
 
   while (wb_robot_step(TIME_STEP) != -1) {
-    
+
     // distance sensors
     double ps_values[8];
     for (i = 0; i < 8; ++i) {
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
       printf("sonar%d = %f ", i, ps_values[i]);
     }
     printf("\n");
-    
+
     double sharp_values[8];
     for (i = 0; i < 8; ++i) {
       sharp_values[i] = wb_distance_sensor_get_value(sharp[i]);

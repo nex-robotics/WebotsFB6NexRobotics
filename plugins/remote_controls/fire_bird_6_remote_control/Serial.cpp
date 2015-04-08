@@ -295,7 +295,7 @@ void Serial::updatePorts()
   BYTE lpData[256];
   DWORD lpcValueName, lpcData;
   RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("HARDWARE\\DEVICEMAP\\SERIALCOMM"), 0, KEY_READ, &k);
-  
+
   for(int i = 0; ; i++) {
     lpcValueName = 256;
     lpcData = 256;
@@ -346,7 +346,7 @@ void Serial::updatePorts()
 
   CFDictionarySetValue(classesToMatch, CFSTR(kIOSerialBSDTypeKey),
                        CFSTR(kIOSerialBSDRS232Type));
-  kernResult = IOServiceGetMatchingServices(kIOMasterPortDefault, classesToMatch, &serialPortIterator);    
+  kernResult = IOServiceGetMatchingServices(kIOMasterPortDefault, classesToMatch, &serialPortIterator);
   if (kernResult != KERN_SUCCESS) printf("IOServiceGetMatchingServices failed: %d\n",kernResult);
   io_object_t service;
   while ((service = IOIteratorNext(serialPortIterator))) {
@@ -356,7 +356,7 @@ void Serial::updatePorts()
     if (bsdPathAsCFString) {
       Boolean result;
       char bsdPath[MAXPATHLEN];
-      result = CFStringGetCString((CFStringRef)bsdPathAsCFString, bsdPath, sizeof(bsdPath), 
+      result = CFStringGetCString((CFStringRef)bsdPathAsCFString, bsdPath, sizeof(bsdPath),
                                 kCFStringEncodingUTF8);
       CFRelease(bsdPathAsCFString);
       if (result) {
