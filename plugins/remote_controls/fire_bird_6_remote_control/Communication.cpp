@@ -37,7 +37,7 @@ bool Communication::initialize(const string &port) {
     mSerial = new Serial(port);
     char *answer;
 	char testCMD[5] = {0x4e, 0x45, 0x58, 0x05, 0x01};
-	const char safetyOFF[5] = {0x4e, 0x45, 0x58, 0x89, 0x00};
+	const unsigned char safetyOFF[5] = {0x4e, 0x45, 0x58, 0x89, 0x00};
 
     // Test message for checking communication
 	answer = talk(testCMD);
@@ -49,7 +49,7 @@ bool Communication::initialize(const string &port) {
       throw runtime_error("Cannot talk with the robot");
 
 	// turn off safety
-	mSerial->write(safetyOFF, 5);
+	mSerial->write((const char *)safetyOFF, 5);
 
 	cout << "Running real Fire Bird (" << &answer[0] << ")" << endl;
     free(answer);
