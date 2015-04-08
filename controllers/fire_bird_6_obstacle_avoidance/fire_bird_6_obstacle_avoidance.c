@@ -44,15 +44,21 @@ int main(int argc, char **argv)
 
     int threshold = 250;
 
-    bool left_obstacle = ps_values[0] < threshold || ps_values[1] < threshold || ps_values[7] < threshold || ps_values[2] < threshold;
-    bool right_obstacle = ps_values[5] < threshold || ps_values[6] < threshold || ps_values[4] < threshold || ps_values[3] < threshold;
+    bool left_obstacle = ps_values[1] < threshold || ps_values[0] < threshold;
+    bool right_obstacle = ps_values[3] < threshold || ps_values[4] < threshold;
+    bool front_obstacle = ps_values[2] < threshold;
 
     // init speeds
     double left_speed = 1;
     double right_speed = 1;
 
     // modify speeds according to obstacles
-    if (left_obstacle) {
+    if (front_obstacle) {
+      // turn back, but slightly right to not block the robot
+      left_speed -= 1.0;
+      right_speed -= 2.0;
+    }
+    else if (left_obstacle) {
       // turn right
       left_speed += 2.0;
       right_speed -= 2.0;
