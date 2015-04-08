@@ -47,7 +47,7 @@ unsigned short Packet::readUShortAt(int pos) {
 short Packet::readShortAt(int pos) {
   if (pos + (int) sizeof(short) > mMaxSize)
     throw overflow_error("Packet max size overflow");
-  
+
   unsigned char c1 = static_cast <unsigned char> (mData[pos]);
   unsigned char c2 = static_cast <unsigned char> (mData[pos + 1]);
   return c1 + (c2 << 8);
@@ -56,7 +56,7 @@ short Packet::readShortAt(int pos) {
 short Packet::readShortAt_MSBFirst(int pos) {
   if (pos + (int) sizeof(short) > mMaxSize)
     throw overflow_error("Packet max size overflow");
-  
+
   unsigned char c1 = static_cast <unsigned char> (mData[pos]);
   unsigned char c2 = static_cast <unsigned char> (mData[pos + 1]);
   return c2 + (c1 << 8);
@@ -65,7 +65,7 @@ short Packet::readShortAt_MSBFirst(int pos) {
 int Packet::readIntAt(int pos) {
   if (pos + (int) sizeof(int) > mMaxSize)
     throw overflow_error("Packet max size overflow");
-  
+
   unsigned char c1 = static_cast <unsigned char> (mData[pos]);
   unsigned char c2 = static_cast <unsigned char> (mData[pos + 1]);
   unsigned char c3 = static_cast <unsigned char> (mData[pos + 2]);
@@ -79,7 +79,7 @@ unsigned char Packet::readUCharAt(int pos) {
 
   return static_cast <unsigned char> (mData[pos]);
 }
- 
+
 void Packet::print() {
   cout << "Content:" << endl;
   for (int i=0; i<mSize; i++) {

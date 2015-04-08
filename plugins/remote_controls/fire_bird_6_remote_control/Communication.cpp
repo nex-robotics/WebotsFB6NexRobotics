@@ -32,33 +32,31 @@ Communication::~Communication() {
 }
 
 bool Communication::initialize(const string &port) {
-  try
-  {
+  try {
     mSerial = new Serial(port);
     char *answer;
-	char testCMD[5] = {0x4e, 0x45, 0x58, 0x05, 0x01};
-	const unsigned char safetyOFF[5] = {0x4e, 0x45, 0x58, 0x89, 0x00};
+    char testCMD[5] = {0x4e, 0x45, 0x58, 0x05, 0x01};
+    const unsigned char safetyOFF[5] = {0x4e, 0x45, 0x58, 0x89, 0x00};
 
     // Test message for checking communication
-	answer = talk(testCMD);
+    answer = talk(testCMD);
 
-	if (!answer)
+    if (!answer)
       throw runtime_error("Cannot talk with the robot");
 
     if (!mSerial)
       throw runtime_error("Cannot talk with the robot");
 
-	// turn off safety
-	mSerial->write((const char *)safetyOFF, 5);
+    // turn off safety
+    mSerial->write((const char *)safetyOFF, 5);
 
-	cout << "Running real Fire Bird (" << &answer[0] << ")" << endl;
+    cout << "Running real Fire Bird (" << &answer[0] << ")" << endl;
     free(answer);
-    
+
     mInitialized = true;
     return true;
   }
-  catch (const runtime_error &e)
-  {
+  catch (const runtime_error &e) {
     cerr << "Connection failed with this error" << endl;
     cerr << e.what() << endl;
     cerr << endl;
@@ -84,16 +82,14 @@ bool Communication::sendPacket(const Packet *packet) {
       return true;
     }
   }
-  catch (const runtime_error &e)
-  {
+  catch (const runtime_error &e) {
     cerr << "Cannot send packet to Fire Bird: " << e.what() << endl;
   }
   return false;
 }
 
 bool Communication::receivePacket(Packet *packet) {
-  try
-  {
+  try {
     if (mSerial) {
       int packetSize = packet->size();
       if (packetSize > 0) {
@@ -108,8 +104,7 @@ bool Communication::receivePacket(Packet *packet) {
       return true;
     }
   }
-  catch (const runtime_error &e)
-  {
+  catch (const runtime_error &e) {
     cerr << "Cannot receive packet from Fire Bird: " << e.what() << endl;
   }
   return false;
@@ -125,17 +120,16 @@ char *Communication::talk(const char *source) {
   for (int i=0; i<trial; i++) { // several trials
     try {
       char *answer = (char *) malloc(13);
-	  mSerial->write(source, 5);
-	  mSerial->read(answer, 13, 1);  
+      mSerial->write(source, 5);
+      mSerial->read(answer, 13, 1);
       if (answer[0] == 'F')
         return answer;
 
-	  free(answer);
+      free(answer);
 
       throw runtime_error("Unexpected result");
     }
-    catch (const runtime_error &e)
-    {
+    catch (const runtime_error &e) {
       cerr << errorPrefix << e.what() << endl;
     }
     cerr << "Talk to Fire Bird failed... Retry (" << (i+1) << ")" << endl;
@@ -154,8 +148,7 @@ char *Communication::readLine() {
   try {
     return mSerial->readLine();
   }
-  catch (const runtime_error &e)
-  {
+  catch (const runtime_error &e) {
     cerr << errorPrefix << e.what() << endl;
   }
   return NULL;

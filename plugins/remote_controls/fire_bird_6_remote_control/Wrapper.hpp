@@ -34,7 +34,7 @@ public:
   static void differentialWheelsSetSpeed(double left, double right);
   static void differentialWheelsSetEncoders(double left, double right);
   static void ledSet(WbDeviceTag tag, int state);
-  
+
   static void *callCustomFunction(void *args);
 
 private:

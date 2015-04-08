@@ -52,4 +52,3 @@ void wbw_show() {
   if (gGui)
     gGui->showWindow();
 }
-

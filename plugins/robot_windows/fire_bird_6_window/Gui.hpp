@@ -38,5 +38,3 @@ private:
 };
 
 #endif // GUI_HPP
-
-

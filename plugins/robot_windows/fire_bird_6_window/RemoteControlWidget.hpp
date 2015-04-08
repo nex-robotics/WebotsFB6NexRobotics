@@ -45,7 +45,7 @@ private:
 
   RemoteControlWidget(QWidget *parent = NULL);
   ~RemoteControlWidget();
-  
+
   QGridLayout *mLayout;
   QComboBox *mPortsComboBox;
   QPushButton *mRefreshPortsButton;
@@ -58,7 +58,7 @@ private:
   QProgressDialog *mConnectProgressDialog;
   QFutureWatcher<int> *mConnectFutureWatcher;
   QFutureWatcher<int> *mUploadFutureWatcher;
-  
+
 };
 
 #endif

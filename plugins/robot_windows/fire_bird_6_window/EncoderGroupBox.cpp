@@ -19,7 +19,7 @@ EncoderGroupBox::EncoderGroupBox(QWidget *parent):
     mVBox->addWidget(mLabels[i]);
   }
   setLayout(mVBox);
-  
+
   // set the title
   setTitle("Encoders");
 }
@@ -34,12 +34,12 @@ EncoderGroupBox::~EncoderGroupBox() {
 // update the mLabels
 void EncoderGroupBox::updateValues() {
   FireBird6Representation *fireBird6 = FireBird6Representation::instance();
-  
+
   bool enable = fireBird6->areEncodersEnabled();
   setEnabled(enable);
   if (!enable)
     return;
-  
+
   double encoders[] = {
     fireBird6->leftEncoderValue(),
     fireBird6->rightEncoderValue()
