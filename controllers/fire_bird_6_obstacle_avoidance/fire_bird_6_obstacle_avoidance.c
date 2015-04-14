@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     }
     printf("\n");
 
-    int threshold = 250;
+    int threshold = 0.25;
 
     bool left_obstacle = ps_values[1] < threshold || ps_values[0] < threshold;
     bool right_obstacle = ps_values[3] < threshold || ps_values[4] < threshold;
