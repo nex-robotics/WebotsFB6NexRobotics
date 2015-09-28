@@ -1,12 +1,5 @@
 /*
- * File:          RemoteControlWidget.hpp
- * Date:          September 2010
  * Description:   Class defining the remote control interface group box
- * Author:        fabien.rohrer@cyberbotics.com
- * Modifications: - Stefania Pedrazzi - September 2012
- *                  Add upload function
- *                - Fabien Rohrer - November 2012
- *                  Add a button to enable all the sensors
  */
 
 #ifndef REMOTE_CONTROL_GROUP_BOX_HPP

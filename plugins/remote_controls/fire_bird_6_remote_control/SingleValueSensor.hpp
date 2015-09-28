@@ -1,9 +1,5 @@
 /*
- * File:         SingleValueSensor.hpp
- * Date:         June 2012
  * Description:  Abstraction of a sensor returning one floating point value
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef SINGLE_VALUE_SENSOR_HPP

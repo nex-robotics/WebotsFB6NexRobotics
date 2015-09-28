@@ -1,9 +1,5 @@
 /*
- * File:         MainWidget.hpp
- * Date:         September 2010
  * Description:  Class defining the widget containing the firebird6 representation
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef MAIN_WIDGET_HPP

@@ -1,9 +1,5 @@
 /*
- * File:         FireBird6Representation.hpp
- * Date:         September 2010
  * Description:  Facade of an Fire Bird 6. A call of the update function updates the representation using the Webots API
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef FIREBIRD6_REPRESENTATION_HPP
