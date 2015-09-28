@@ -1,9 +1,5 @@
 /*
- * File:         entry_points.hpp
- * Date:         June 2012
  * Description:  Defines the entry point of the remote control library
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef LIB_ROBOT_WINDOW_HPP

@@ -1,9 +1,5 @@
 /*
- * File:         Time.hpp
- * Date:         June 2012
  * Description:  Helper function to return simulation real time
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef TIME_HPP

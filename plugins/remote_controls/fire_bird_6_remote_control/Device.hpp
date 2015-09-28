@@ -1,9 +1,5 @@
 /*
- * File:         Device.hpp
- * Date:         June 2012
  * Description:  Abstraction of a Webots device
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef DEVICE_HPP

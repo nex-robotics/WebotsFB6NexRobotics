@@ -1,9 +1,5 @@
 /*
- * File:         Serial.hpp
- * Date:         June 2012
  * Description:  Defines an interface to communicate on the serial port
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef SERIAL_HPP

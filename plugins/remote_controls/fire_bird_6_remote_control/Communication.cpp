@@ -1,9 +1,5 @@
 /*
- * File:         Communication.cpp
- * Date:         June 2012
  * Description:  Implementation of Communication.hpp functions
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #include "Communication.hpp"

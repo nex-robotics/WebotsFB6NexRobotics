@@ -1,9 +1,5 @@
 /*
- * File:         entry_points.hpp
- * Date:         September 2010
  * Description:  Defines the entry point of the robot window library
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef ENTRY_POINTS_HPP
