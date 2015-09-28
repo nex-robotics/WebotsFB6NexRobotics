@@ -1,9 +1,6 @@
 /*
- * File:          fire_bird_6_sensor_acquisition.c
- * Date:          17 March 2015
  * Description:   Demo code for sensor aquisition for Firebird 6 robot
  * Author:        Anant Malewar; Nex Robotics
- * Modifications:
  */
 
 #include <webots/robot.h>
