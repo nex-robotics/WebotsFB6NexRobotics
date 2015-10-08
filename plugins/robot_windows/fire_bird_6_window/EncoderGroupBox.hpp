@@ -1,9 +1,5 @@
 /*
- * File:         EncoderGroupBox.hpp
- * Date:         September 2010
  * Description:  Class defining the encoder group box
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef ENCODER_GROUP_BOX_HPP

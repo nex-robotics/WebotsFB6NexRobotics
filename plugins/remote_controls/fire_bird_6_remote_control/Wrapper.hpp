@@ -1,9 +1,5 @@
 /*
- * File:         Wrapper.hpp
- * Date:         June 2012
  * Description:  Defines an interface wrapping the libController with this library
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef WRAPPER_HPP

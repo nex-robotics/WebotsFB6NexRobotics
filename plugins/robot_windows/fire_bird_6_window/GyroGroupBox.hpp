@@ -1,9 +1,5 @@
 /*
- * File:         GyroGroupBox.hpp
- * Date:         September 2010
  * Description:  Class defining the accelerometer group box
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef GYRO_GROUP_BOX_HPP

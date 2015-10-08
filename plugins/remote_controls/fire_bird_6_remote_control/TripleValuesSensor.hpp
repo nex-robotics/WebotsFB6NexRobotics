@@ -1,9 +1,5 @@
 /*
- * File:         TripleValuesSensor.hpp
- * Date:         June 2012
  * Description:  Abstraction of a sensor returning three floating point value
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef TRIPLE_VALUES_SENSOR_HPP

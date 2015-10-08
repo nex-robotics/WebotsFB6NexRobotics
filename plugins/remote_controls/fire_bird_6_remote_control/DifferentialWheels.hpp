@@ -1,9 +1,5 @@
 /*
- * File:         DifferentialWheels.hpp
- * Date:         June 2012
  * Description:  Abstraction of a differential wheels
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef DIFFERENTIAL_WHEELS_HPP

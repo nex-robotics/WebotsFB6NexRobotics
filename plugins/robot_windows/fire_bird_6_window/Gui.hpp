@@ -1,9 +1,5 @@
 /*
- * File:         Gui.hpp
- * Date:         September 2010
  * Description:  Class defining the robot window of the Firebird6
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef GUI_HPP

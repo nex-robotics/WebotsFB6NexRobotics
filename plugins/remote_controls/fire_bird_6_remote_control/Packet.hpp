@@ -1,9 +1,5 @@
 /*
- * File:         Packet.hpp
- * Date:         June 2012
  * Description:  Defines a packet
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef PACKET_HPP

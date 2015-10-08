@@ -1,9 +1,5 @@
 /*
- * File:         FireBird6OutputPacket.hpp
- * Date:         August 2013
  * Description:  Defines a packet sent from remote control library to the Fire Bird 6
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications: Anant Malewar
  */
 
 #ifndef FIREBIRD6_OUTPUT_PACKET_HPP

@@ -1,9 +1,5 @@
 /*
- * File:         DeviceManager.hpp
- * Date:         June 2012
  * Description:  Class allowing to create or retrieve devices
- * Author:       fabien.rohrer@cyberbotics.com
- * Modifications:
  */
 
 #ifndef DEVICE_MANAGER_HPP
