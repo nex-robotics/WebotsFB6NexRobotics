@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include <fcntl.h>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
@@ -18,19 +18,19 @@
 #include <ctype.h>
 #include <winreg.h>
 
-#else // LINUX && MACOS
+#else // __linux__ || __APPLE__
 
 #include <termios.h>
 #include <errno.h>
 
-#ifdef MACOS
+#ifdef __APPLE__
 #include <IOKit/IOKitLib.h>
 #include <IOKit/serial/IOSerialKeys.h>
 #include <IOKit/serial/ioss.h>
 #include <IOKit/IOBSD.h>
 #include <sys/param.h>
 
-#else // LINUX
+#else // __linux__
 #include <termio.h>
 
 #endif
@@ -40,7 +40,7 @@ using namespace std;
 
 vector<string> Serial::portNames;
 
-#ifdef WIN32
+#ifdef _WIN32
 struct readFileThreadArguments {
   int nrd, c, size;
   char *buffer;
@@ -51,14 +51,14 @@ struct readFileThreadArguments {
 Serial::Serial(const string &name) :
   mName(name)
 {
-#ifdef WIN32
+#ifdef _WIN32
   DCB dcb;
   COMMTIMEOUTS commTimeouts;
-#else // LINUX & MACOS
+#else // __linux__ || __APPLE__
   struct termios term;
 #endif
 
-#ifdef WIN32
+#ifdef _WIN32
   mFd = CreateFile(name.c_str(), GENERIC_READ|GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
   if (mFd == INVALID_HANDLE_VALUE) {
     mFd = (HANDLE) -1;
@@ -96,7 +96,7 @@ Serial::Serial(const string &name) :
   commTimeouts.WriteTotalTimeoutConstant   = 1000;
   SetCommTimeouts(mFd, &commTimeouts);
 
-#elif defined (MACOS)
+#elif defined (__APPLE__)
   mFd = ::open(name.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
   if (mFd == -1)
     throwFatalException("Could not open this port");
@@ -112,7 +112,7 @@ Serial::Serial(const string &name) :
     throwFatalException("Error getting the tty attributes");
   }
 
-#else // LINUX
+#else // __linux__
   mFd = open(name.c_str(), O_RDWR | O_NOCTTY);
   if (mFd > 0) {
     tcflush(mFd, TCIOFLUSH); // flush old data
@@ -122,11 +122,11 @@ Serial::Serial(const string &name) :
     mFd = -1;
     throwFatalException("Unable to set serial attributes");
   }
-#endif // LINUX
+#endif // __linux__
 }
 
 Serial::~Serial() {
-#ifdef WIN32
+#ifdef _WIN32
   if (mFd) {
     int ret = CloseHandle(mFd);
     if (ret == 0)
@@ -138,7 +138,7 @@ Serial::~Serial() {
 #endif
 }
 
-#ifdef WIN32
+#ifdef _WIN32
 DWORD Serial::readFileThread (void *param)
 {
   //ReadFile in a thread because it never returns if the commnication breaks suddenly
@@ -154,7 +154,7 @@ int Serial::read(char *packet, int size, bool wait)
   int nrd = 0;
   int c;
 
-#ifdef WIN32
+#ifdef _WIN32
   // Change the COMMTIMEOUTS structure settings
   COMMTIMEOUTS commTimeouts;
   GetCommTimeouts(mFd, &commTimeouts);
@@ -174,7 +174,7 @@ int Serial::read(char *packet, int size, bool wait)
 
   do {
 
-#ifdef WIN32
+#ifdef _WIN32
     readFileThreadArguments ta;
     ta.nrd = nrd;
     ta.c = 0;
@@ -217,7 +217,7 @@ void Serial::drain()
 
 void Serial::write(const char *packet, int s)
 {
-#ifdef WIN32
+#ifdef _WIN32
   int size;
   WriteFile(mFd, packet, s, (LPDWORD) &size, 0);
 #else
@@ -230,7 +230,7 @@ void Serial::write(const char *packet, int s)
 
 void Serial::sleep(int ms)
 {
-#ifdef WIN32
+#ifdef _WIN32
   Sleep(ms);
 #else
   usleep(ms * 1000);
@@ -289,7 +289,7 @@ void Serial::updatePorts()
 {
   portNames.clear();
 
-#ifdef WIN32
+#ifdef _WIN32
   static HKEY k;
   CHAR lpValueName[256];
   BYTE lpData[256];
@@ -312,7 +312,7 @@ void Serial::updatePorts()
   }
   RegCloseKey(k);
 
-#elif defined (LINUX)
+#elif defined (__linux__)
   FILE *rfcomm=fopen("/etc/bluetooth/rfcomm.conf","r");
   if (rfcomm) {
     char line[256];
@@ -336,7 +336,7 @@ void Serial::updatePorts()
     fclose(rfcomm);
   }
 
-#elif defined (MACOS)
+#elif defined (__APPLE__)
   CFMutableDictionaryRef classesToMatch;
   kern_return_t kernResult;
   io_iterator_t	serialPortIterator;
