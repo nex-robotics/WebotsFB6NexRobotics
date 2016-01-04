@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #endif
 
@@ -34,7 +34,7 @@ private:
   void throwFatalException(const std::string &errorMessage, bool displayLastError=false);
 
   std::string mName;
-#ifdef WIN32
+#ifdef _WIN32
   static DWORD readFileThread(void *param);
   HANDLE mFd;
 #else

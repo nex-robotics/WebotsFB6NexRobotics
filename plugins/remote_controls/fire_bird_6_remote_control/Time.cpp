@@ -1,6 +1,6 @@
 #include "Time.hpp"
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #else
 #include <sys/time.h>
@@ -19,7 +19,7 @@ int Time::currentSimulationTime() {
 }
 
 unsigned int Time::currentTime() {
-#ifdef WIN32
+#ifdef _WIN32
   SYSTEMTIME tim;
   GetSystemTime(&tim);
   return (((tim.wHour * 60 + tim.wMinute) * 60 + tim.wSecond) * 1000 + tim.wMilliseconds) + 0.5;
@@ -31,7 +31,7 @@ unsigned int Time::currentTime() {
 }
 
 void Time::wait(int duration) {
-#ifdef WIN32
+#ifdef _WIN32
   Sleep(duration);
 #else
   // because usleep cannot handle values
