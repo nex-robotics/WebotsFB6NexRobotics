@@ -8,7 +8,7 @@ PROTO FireBird6 [
   field SFString name "Fire Bird 6"
   field SFString controller "fire_bird_6_obstacle_avoidance"
   field SFString controllerArgs ""
-  field SFString robotWindow "fire_bird_6_window"
+  field SFString window "fire_bird_6_window"
   field SFString remoteControl ""
   field MFNode bodySlot []
 ]
@@ -2349,7 +2349,7 @@ DifferentialWheels {
   }
   controller IS controller
   controllerArgs IS controllerArgs
-  robotWindow IS robotWindow
+  window IS window
   remoteControl IS remoteControl
   axleLength 0.3
   wheelRadius 0.05
